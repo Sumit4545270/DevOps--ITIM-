@@ -1,0 +1,293 @@
+Bhai **Port Mapping** ko aise seekh le ki Interviewer bhi bole — “Isko hire karo! 🔥”
+
+---
+
+## 💡 Port Mapping kya hota hai?
+
+Docker Container ke paas **apna khud ka Network** hota hai 🔒
+Isliye container ke andar chal raha app **seedha bahar se access nahi hota** ❌
+
+To hum **bridge** banate hain jisse:
+
+✔ Browser (host machine se)
+✔ Container ke andar running application ko
+✔ Access kar sakta ho
+
+Ye bridge = **Port Mapping** ✅
+
+---
+
+## 🍔 Sabse Easy Example → McDonald's Stall 😎
+
+Container = McDonald's stall 🍔
+Container ka internal counter number: **Port 80**
+(burger udhar milta hai)
+
+Par customers road par khade hai…
+
+Road gate number: **Port 8080**
+
+Mapping:
+
+```
+Gate 8080 (Host) → Counter 80 (Container)
+```
+
+Ab koi bhi bole:
+👉 [http://localhost:8080](http://localhost:8080)
+➡ Container ke counter 80 par order chale jayega ✅
+
+---
+
+## 🔥 Docker Command Example
+
+```
+docker run -d -p 8080:80 nginx
+```
+
+Breakdown:
+
+| Part     | Meaning                  |
+| -------- | ------------------------ |
+| -d       | Background me run        |
+| -p       | Port mapping             |
+| **8080** | Host Port (Aapka Laptop) |
+| **80**   | Container Port           |
+
+---
+
+## 📌 Host Port vs Container Port
+
+| Host Port              | Container Port                         |
+| ---------------------- | -------------------------------------- |
+| Computer ki entry gate | Container ke andar application ka gate |
+| Bahar se access hota   | Sirf container ke andar se access      |
+
+---
+
+## 😎 Why different numbers?
+
+Kabhi host par port 80 already kisi aur app ne le rakha hota hai ❌
+To hum **custom host port** set kar sakte:
+
+Example:
+
+```
+-p 5000:80
+```
+
+Host → 5000
+Container → 80
+
+Port alag
+Application same ✅
+
+---
+
+## ✅ Real World Use Case
+
+| Service     | Container Port | Host Port (example) |
+| ----------- | -------------- | ------------------- |
+| Nginx (Web) | 80             | 8080                |
+| React App   | 3000           | 3000                |
+| MySQL       | 3306           | 3306                |
+| Jenkins     | 8080           | 9090                |
+
+---
+
+## Interview Smart Answer 🔥
+
+> **Port mapping is a mechanism that exposes container’s internal ports to the outside world.**
+> Example: `-p 8080:80`
+>
+> Here, **8080 is host port** and **80 is container port**.
+>
+> It allows access to the app running inside the container.
+
+Short, Full Marks ✅
+
+---
+
+## Quick Revision in 4 Lines
+
+* Container gate (internal) → Container Port
+* Laptop gate (external) → Host Port
+* App inside = private
+* Port mapping = **public access**
+
+---
+
+Agar tu chahe to **Port Mapping Practical** bhi karwa du?
+
+**Example Practical:**
+✅ Run Nginx
+✅ Browser access
+✅ Logs
+✅ Stop/Delete container
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Interview based Question and Answer)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bilkul bhai! ✅
+**Port Mapping + Docker Networking** ke **Top Interview Questions & Answers** — simple, crisp aur full selection level! 🔥
+
+---
+
+# ✅ Docker Port Mapping – Interview Q&A
+
+### **Q1. Port Mapping kya hota hai?**
+
+**A:**
+Port Mapping container ke internal port ko host port se connect karta hai, taaki container ke andar chal raha application bahar se access ho sake.
+Example:
+
+```
+docker run -p 8080:80 nginx
+```
+
+👉 Browser: `localhost:8080`
+Container ke andar port `80` hit hota hai ✅
+
+---
+
+### **Q2. `-p 8080:80` ka kya meaning hai?**
+
+* **8080 → Host Port**
+* **80 → Container Port**
+
+➡ Host machine se container ke application tak signal ko forward karta hai.
+
+---
+
+### **Q3. Host port aur Container port me difference kya hai?**
+
+| Host Port                      | Container Port                         |
+| ------------------------------ | -------------------------------------- |
+| Laptop/Server ka internet gate | Container ke andar app ka private gate |
+| Bahar se access ho sakta hai   | Direct access nahi                     |
+
+---
+
+### **Q4. Agar main `-p` use nahi karu to kya hoga?**
+
+App sirf container ke andar chalega
+Bahar se browser ya network se connect nahi hoga ❌
+
+---
+
+### **Q5. Ek host port par multiple containers run ho sakte hai?**
+
+**Nahi!**
+Host port **unique** hona chahiye ✅
+Container ports same ho sakte hain ✅
+Example ✅
+
+```
+-p 8081:80
+-p 8082:80
+```
+
+---
+
+### **Q6. `-P` aur `-p` me difference?**
+
+| Option | Meaning                               |
+| ------ | ------------------------------------- |
+| `-p`   | Manual port mapping                   |
+| `-P`   | Random host port assign automatically |
+
+Example:
+
+```
+docker run -P nginx
+```
+
+Docker automatically jaise:
+📌 host port: **49155** → container port: **80**
+
+---
+
+### **Q7. Default Docker network mode kya hai?**
+
+✔ **Bridge network**
+
+Isme port mapping required hota hai for external access ✅
+
+---
+
+### **Q8. Without port mapping container internet access kaise deta?**
+
+Vo host ke network se connected hota hai but **incoming requests** nahi receive kar sakta.
+Only outbound traffic allowed ✅ (ex: curl google.com)
+
+---
+
+### **Q9. Agar port already in use ho to error?**
+
+```
+Error: port is already allocated
+```
+
+Solution:
+
+* Dusra host port use karo
+* Ya jo app port use kar raha hai use stop karo
+
+---
+
+### **Q10. Real-time example of port mapping?**
+
+Microservices architecture me:
+
+| Service     | Container Port | Host Port |
+| ----------- | -------------- | --------- |
+| Frontend    | 3000           | 3000      |
+| Backend API | 8000           | 8001      |
+| Database    | 3306           | 3306      |
+
+---
+
+## ✅ Bonus Answer – Short and Professional 🔥
+
+> Port Mapping allows external access to containerized applications by binding a host port to a container port. Example:
+> `-p 8080:80` maps Host:8080 → Container:80
+> It’s essential in bridge network mode to expose services running inside containers.
+
+---
+
+### Bhai ye 10 Q&A interview me pakka aayenge ✅
+
+Tu safe side me rehga 😎
+
+---
+
+Agar tu bole to next topic sikha deta hoon:
+✅ Docker Volumes
+✅ Docker Networking Types
+✅ Dockerfile + CI/CD integration
