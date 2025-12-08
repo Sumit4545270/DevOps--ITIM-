@@ -1,0 +1,188 @@
+Bhai ab **Deployments ke basic commands** ko ekdum **spoon-feeding + clear understanding + real-life explanation** ke sath de raha hoon.
+Aise samajh jayega ki interview me bhi confident bol paayega 💯
+
+---
+
+# 🚀 **Kubernetes Deployment – Basic Command Set
+
+(With Clear Meaning + Real-life Example)**
+
+---
+
+# ✅ **1. Create a Deployment**
+
+### **Command**
+
+```bash
+kubectl create deployment nginx-deploy --image=nginx
+```
+
+### **Meaning**
+
+A Deployment **creates and manages Pods automatically**.
+
+### **Real-life Example**
+
+Jaise tu “nginx webserver” chalana chahta hai → tu sirf Deployment banata hai.
+Deployment khud hi Pod bana dega.
+
+---
+
+# ✅ **2. View Deployments**
+
+### **Command**
+
+```bash
+kubectl get deployments
+```
+
+### **Meaning**
+
+Cluster me kaun-kaun se deployments chal rahi hai dekhta hai.
+
+### **Real-life Example**
+
+Jaise “apna app prod me deploy hua kya?” → isse check karega.
+
+---
+
+# ✅ **3. View Deployment Details**
+
+### **Command**
+
+```bash
+kubectl describe deployment nginx-deploy
+```
+
+### **Meaning**
+
+Deployment ka full report:
+
+* image
+* replicas
+* labels
+* events
+* rollout status
+
+### **Real-life Example**
+
+Jaise doctor report → Tumhare app ki health dekhta hai.
+
+---
+
+# ✅ **4. Scale Deployment (Increase/Decrease Pods)**
+
+### **Command**
+
+```bash
+kubectl scale deployment nginx-deploy --replicas=5
+```
+
+### **Meaning**
+
+Deployment ke andar POD count badha deta hai (load zyada ho to helpful).
+
+### **Real-life Example**
+
+Jaise Diwali sale me Flipkart ko extra servers chahiye → isse scale karte.
+
+---
+
+# ✅ **5. Update Deployment (Image Update / Version Upgrade)**
+
+### **Command**
+
+```bash
+kubectl set image deployment/nginx-deploy nginx=nginx:latest
+```
+
+### **Meaning**
+
+Running application ka version update karta hai.
+
+### **Real-life Example**
+
+App ka new version release karte time.
+
+---
+
+# ✅ **6. Check Rollout Status**
+
+### **Command**
+
+```bash
+kubectl rollout status deployment nginx-deploy
+```
+
+### **Meaning**
+
+Kya update success hua ya fail hua → live status deta hai.
+
+### **Real-life Example**
+
+Jaise tu app update kar raha → yeh batata hai update safe hua ya nahi.
+
+---
+
+# ✅ **7. Rollback Deployment**
+
+### **Command**
+
+```bash
+kubectl rollout undo deployment nginx-deploy
+```
+
+### **Meaning**
+
+Agar update me issue ho gaya, to purane version par chala jaata.
+
+### **Real-life Example**
+
+Jaise new app update me bug mil gaya → "Undo" pe wapas chala gaya.
+
+---
+
+# ✅ **8. Delete Deployment**
+
+### **Command**
+
+```bash
+kubectl delete deployment nginx-deploy
+```
+
+### **Meaning**
+
+Deployment + uske saare Pods delete.
+
+### **Real-life Example**
+
+Koi demo environment band karna ho.
+
+---
+
+# 🚀 Bonus: See All ReplicaSets Created by Deployment
+
+```bash
+kubectl get rs
+```
+
+Deployment update karne se **multiple ReplicaSets banते** — yeh unko dikhata.
+
+---
+
+# 🔥 **Deployment Real-Life Example (Easiest)**
+
+**Flipkart app production me chal raha hai:**
+
+| Work                | Deployment Role                |
+| ------------------- | ------------------------------ |
+| App chalana         | Deployment Pod create karta    |
+| Load badhe          | Deployment scale hota          |
+| New version release | Deployment image update karega |
+| Bug aa jaye         | Deployment rollback karega     |
+
+Deployment = **App ka manager**
+ReplicaSet = **App ka team leader**
+Pod = **Kaam karne waley worker**
+
+---
