@@ -1,0 +1,182 @@
+Bro yeh **Deployment Commands** ka **Level-2 pack** de raha hoon — simple English + clear understanding + real-life logic.
+(These are **Kubernetes Deployment** commands, jo industry me mostly use hote hain.)
+
+---
+
+# 🚀 **More Deployment Commands (With Clear Meaning + Examples)**
+
+---
+
+## **1️⃣ Check all Deployments**
+
+### **Command**
+
+```
+kubectl get deployments
+```
+
+### **Meaning**
+
+Cluster me jitne deployments chal rahe hain unki list.
+
+### **Example**
+
+You want to confirm your app is deployed → run it.
+
+---
+
+## **2️⃣ Describe a Deployment**
+
+### **Command**
+
+```
+kubectl describe deployment <deployment-name>
+```
+
+### **Meaning**
+
+Deployment ka full detail — events, errors, image kaun sa use ho raha hai, rollout status, etc.
+
+### **Example**
+
+```
+kubectl describe deployment myapp-deploy
+```
+
+---
+
+## **3️⃣ Update Deployment Image**
+
+(Real interview me bohot poochte hain)
+
+### **Command**
+
+```
+kubectl set image deployment/myapp-deploy nginx=nginx:latest
+```
+
+### **Meaning**
+
+Deployment ke containers ka image change karna.
+
+---
+
+## **4️⃣ Scale Deployment**
+
+### **Command**
+
+```
+kubectl scale deployment myapp-deploy --replicas=5
+```
+
+### **Meaning**
+
+Pods ko badhana/ghatana.
+
+---
+
+## **5️⃣ Check Rollout Status**
+
+### **Command**
+
+```
+kubectl rollout status deployment/myapp-deploy
+```
+
+### **Meaning**
+
+New version deploy hua kya? Success ya stuck?
+
+---
+
+## **6️⃣ Rollback to Previous Version**
+
+### **Command**
+
+```
+kubectl rollout undo deployment/myapp-deploy
+```
+
+### **Meaning**
+
+Agar new deployment me error aa gaya → previous version par jao.
+
+---
+
+## **7️⃣ View Deployment History**
+
+### **Command**
+
+```
+kubectl rollout history deployment/myapp-deploy
+```
+
+### **Meaning**
+
+Deployment ke purane revisions dekhna.
+
+---
+
+## **8️⃣ Apply Deployment From YAML File**
+
+### **Command**
+
+```
+kubectl apply -f deployment.yaml
+```
+
+### **Meaning**
+
+YAML file me jo changes kiye → cluster me apply karo.
+
+---
+
+## **9️⃣ Delete Deployment**
+
+### **Command**
+
+```
+kubectl delete deployment myapp-deploy
+```
+
+### **Meaning**
+
+Deployment + uske pods sab delete ho jayenge.
+
+---
+
+## **🔟 Dry-Run Deployment (Check Before Apply)**
+
+### **Command**
+
+```
+kubectl apply -f deployment.yaml --dry-run=client
+```
+
+### **Meaning**
+
+File sahih hai ya nahi → apply nahi hoga, bas check hoga.
+
+---
+
+# 🧠 **Real-Life Example (Super Easy)**
+
+Imagine Flipkart ka "Add to Cart" service.
+
+### **Deployment me kya hota hai?**
+
+* Old version running: **v1**
+* New update lana hai: **v2**
+
+So:
+
+1. You update image
+   `kubectl set image deployment/cart cart=cart:v2`
+2. Kubernetes new pods create karega.
+3. Old pods ko gracefully replace karega.
+4. Agar koi problem aayi:
+   `kubectl rollout undo deployment/cart`
+
+This process is called **Deployment**.
+
+---
