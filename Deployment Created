@@ -1,0 +1,64 @@
+Create a new Deployment with the below attributes using your own deployment definition file. 
+
+Name: httpd-frontend; 
+Replicas: 3; 
+Image: httpd:2.4-alpine
+
+Answer:--->
+
+Here you go bro — **perfect Deployment YAML** for the requirement, 100% correct and ready to apply.
+
+---
+
+# ✅ **Deployment Requirements**
+
+* **Name:** httpd-frontend
+* **Replicas:** 3
+* **Image:** httpd:2.4-alpine
+
+---
+
+# ✅ **Correct YAML File (deployment-definition.yaml)**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpd-frontend
+  template:
+    metadata:
+      labels:
+        app: httpd-frontend
+    spec:
+      containers:
+      - name: httpd-container
+        image: httpd:2.4-alpine
+```
+
+---
+
+# 🚀 **How to Create Deployment**
+
+1️⃣ Save file as:
+`deployment-definition.yaml`
+
+2️⃣ Apply it:
+
+```
+kubectl apply -f deployment-definition.yaml
+```
+
+3️⃣ Verify:
+
+```
+kubectl get deployments
+kubectl get pods
+```
+
+You will see **3 Pods** running from **httpd:2.4-alpine**.
+
