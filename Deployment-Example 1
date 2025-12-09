@@ -1,0 +1,88 @@
+Below is exactly what you need — **the correct fix + the reason + the command to apply it.**
+
+---
+
+# ✅ **Your Issue**
+
+Kubernetes will throw this error:
+
+```
+error: unable to recognize "/root/deployment-definition-1.yaml": no matches for kind "deployment" in version "apps/v1"
+```
+
+This happens because:
+
+### **❌ kind: deployment is wrong (lowercase d)**
+
+### **✔ It must be: kind: Deployment**
+
+Kubernetes resource kinds are **case-sensitive**.
+
+---
+
+# ✅ **Fixed deployment-definition-1.yaml**
+
+Save this corrected YAML inside:
+
+`/root/deployment-definition-1.yaml`
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: busybox-pod
+  template:
+    metadata:
+      labels:
+        name: busybox-pod
+    spec:
+      containers:
+      - name: busybox-container
+        image: busybox
+        command:
+        - sh
+        - "-c"
+        - echo Hello Kubernetes! && sleep 3600
+```
+
+---
+
+# ✅ **Now apply it**
+
+Run:
+
+```
+kubectl apply -f /root/deployment-definition-1.yaml
+```
+
+Check Deployment:
+
+```
+kubectl get deployments
+```
+
+Check Pods:
+
+```
+kubectl get pods
+```
+
+---
+
+# 🧠 **In simple terms: Why this fixed it?**
+
+Kubernetes looks for resource types (Pods, Services, Deployments).
+These names are **exact** and **capitalized**.
+
+So:
+
+### ❌ deployment
+
+### ✔ Deployment
+
+That is the only issue.
