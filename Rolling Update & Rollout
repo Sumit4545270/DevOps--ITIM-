@@ -1,0 +1,102 @@
+Bilkul bhai, **Rolling Updates & Rollbacks** ko ekdum **simple Hindi + English mix** me samjha deta hoon, jaise spoon-feeding ho.
+Yeh DevOps + Kubernetes + Deployment world ka **most important concept** hai.
+
+---
+
+# 🟦 **1. Rolling Update — (Dheere-Dheere update karna, bina down kare)**
+
+### 🔥 Real-life Example:
+
+Tu apne ghar ka **WiFi router** update karta hai, par soch ki update hone ke baad bhi **internet band na ho**.
+Bas wahi **Rolling Update** ka concept hai.
+
+### ✔️ Definition:
+
+Rolling Update means **application ko new version me update karna, bina downtime ke**.
+
+### ✔️ Kubernetes me kaise hota hai?
+
+Kubernetes tumhare deployment ke pods ko:
+
+1. **Ek-ek karke** purane pods ko delete karta hai
+2. Phir **ek-ek karke** naye version ke pods create karta hai
+3. System ** हमेशा running** rehta hai
+
+### ✔️ Why Rolling Update?
+
+* 🚫 No downtime
+* ✔️ Users ko koi impact nahi
+* ✔️ New version smoothly deployed
+
+---
+
+# 🟦 **2. Rollback — (Galti ho jaye toh pichhle version pe wapas jana)**
+
+### 🔥 Real-life Example:
+
+Tu phone me new update install kiya, aur phone hang hone laga.
+Tu sochta:
+
+> "Pehle wala version better tha, wapas chahiye."
+
+Bas **Rollback** me K8s wahi karta hai.
+
+### ✔️ Definition:
+
+Rollback means **application ko previous stable version me wapas lana**.
+
+### ✔️ Kubernetes me kaise hota hai?
+
+Ek command se:
+
+```
+kubectl rollout undo deploy <deployment-name>
+```
+
+Aur tumhara app **instant old version** me aa jata hai.
+
+---
+
+# 🟦 **3. Why these concepts are used?**
+
+### Rolling Update:
+
+* For **zero-downtime deployments**
+* Continuous updates without stopping service
+* Safe gradual rollout
+
+### Rollback:
+
+* If new version has:
+
+  * ❌ bugs
+  * ❌ errors
+  * ❌ performance issues
+* Then go back to stable version
+
+---
+
+# 🟩 Summary in 10 seconds:
+
+| Concept            | Meaning                             | Example                                           |
+| ------------------ | ----------------------------------- | ------------------------------------------------- |
+| **Rolling Update** | Update app slowly, no downtime      | Phone apps update silently without stopping phone |
+| **Rollback**       | Undo update, go back to old version | Bad update → revert back                          |
+
+---
+
+# 🟦 Easy Diagram (Understanding Booster)
+
+```
+Rolling Update:
+[POD v1] [POD v1]  ->  [POD v2] [POD v1]  ->  [POD v2] [POD v2]
+
+Rollback:
+[POD v2] [POD v2]  ->  [POD v1] [POD v1]
+```
+
+---
+
+# 🟦 Want practical kubectl commands also?
+
+Main de du kya? Commands + live example?
