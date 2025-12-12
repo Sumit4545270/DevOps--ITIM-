@@ -1,0 +1,138 @@
+Bilkul bhai, **ROLLING UPDATE & ROLLOUT commands** ko ek-ek karke **short, simple, real-world DevOps language** me samjha deta hoon.
+Ye CDAC practical + interview dono me kaam ayega.
+
+---
+
+# 🚀 **1. Check Deployment**
+
+```
+kubectl get deployments
+```
+
+**Meaning:**
+Cluster me kaun-kaun se deployment chal rahe hain wo dekhne ke liye.
+
+---
+
+# 🚀 **2. Create/Apply Deployment**
+
+```
+kubectl apply -f deployment.yaml
+```
+
+**Meaning:**
+YAML file me jo likha hai, usko Kubernetes cluster me create/update karo.
+
+---
+
+# 🚀 **3. Start a Rolling Update**
+
+```
+kubectl set image deployment/myapp-deploy myapp-container=myimage:v2
+```
+
+**Meaning:**
+Deployment me container ka image change karo.
+Jaise hi image change hota hai → Kubernetes automatically **rolling update** start kar deta hai.
+
+**Rolling update kya karta hai?**
+Purane pods ko dheere-dheere terminate karta hai
+Naye pods ko ek-ek karke start karta hai
+Application **down nahi hoti**
+
+---
+
+# 🚀 **4. Check Update Progress**
+
+```
+kubectl rollout status deployment/myapp-deploy
+```
+
+**Meaning:**
+Rolling update chal raha hai ya complete hua?
+Iss command se pata chalta hai.
+
+---
+
+# 🚀 **5. Check Previous Versions**
+
+```
+kubectl rollout history deployment/myapp-deploy
+```
+
+**Meaning:**
+Deployment ki purani revisions (v1, v2, v3...) dekh sakte ho.
+Agar rollback karna ho to ye version numbers kaam aate hain.
+
+---
+
+# 🚀 **6. Rollback to Last Version**
+
+```
+kubectl rollout undo deployment/myapp-deploy
+```
+
+**Meaning:**
+Agar update me problem aa jaye to turant pichle stable version pe wapas jao.
+
+---
+
+# 🚀 **7. Rollback to a Specific Version**
+
+```
+kubectl rollout undo deployment/myapp-deploy --to-revision=3
+```
+
+**Meaning:**
+Direct version number choose karke ussi version pe rollback kar sakte ho.
+
+---
+
+# 🚀 **8. Pause a Rolling Update**
+
+```
+kubectl rollout pause deployment/myapp-deploy
+```
+
+**Meaning:**
+Agar rolling update chal raha ho aur tum use rokna chaho,
+taaki tum multiple changes ek saath apply kar sako → use this.
+
+---
+
+# 🚀 **9. Resume Update**
+
+```
+kubectl rollout resume deployment/myapp-deploy
+```
+
+**Meaning:**
+Jo rolling update pause kiya tha → wapas start karo.
+
+---
+
+# 🚀 **10. Scale Deployment**
+
+```
+kubectl scale deployment/myapp-deploy --replicas=5
+```
+
+**Meaning:**
+Deployment me pod count badhana/ghatana.
+Example: 3 pods → 5 pods
+
+Scaling ke time bhi Kubernetes zero-downtime me change karta hai.
+
+---
+
+# 🔥 **SUPER SHORT SUMMARY (CDAC Exam Style)**
+
+| Command              | Explanation                   |
+| -------------------- | ----------------------------- |
+| `set image`          | Rolling update start          |
+| `rollout status`     | Update successful hua ya nahi |
+| `rollout history`    | Previous versions dekho       |
+| `rollout undo`       | Rollback last version         |
+| `undo --to-revision` | Specific version rollback     |
+| `rollout pause`      | Update stop                   |
+| `rollout resume`     | Update continue               |
