@@ -1,0 +1,138 @@
+Bhai, ye task **Kubernetes** ka basic troubleshooting + inspection hai. Tu ne webapp deploy kiya hai, ab bas uske **Pods** aur **Service** check karni hai, phir “Webapp Portal” link se open karna hai.
+
+Neeche **saare commands + explanation** simple language me de raha hu 👇
+
+---
+
+# ✅ **1. PODS check karne ka command**
+
+```
+kubectl get pods
+```
+
+### 👉 Ye kya batata hai?
+
+* Kitne pods run ho rahe hain
+* Pod Running / Pending / CrashLoopBackOff / Error me hai ya nahi
+* Pod ka naam
+
+---
+
+# ✅ **2. Pods ka detailed status dekhne ka command**
+
+```
+kubectl describe pod <pod-name>
+```
+
+### 👉 Ye kya batata hai?
+
+* Koi error hai?
+* Image pull ho raha hai ya nahi
+* Events (failed, pulling, started, created)
+* Container logs
+
+---
+
+# ✅ **3. SERVICES check karne ka command**
+
+```
+kubectl get svc
+```
+
+### 👉 Ye kya batata hai?
+
+* LoadBalancer / NodePort / ClusterIP?
+* Service ka IP
+* Port kis par host ho raha hai—80, 30000, etc
+* Webapp kis service se connected hai
+
+---
+
+# ✅ **4. Service ka detailed status**
+
+```
+kubectl describe svc <service-name>
+```
+
+### 👉 Ye kya batata hai?
+
+* Selector labels
+* Service kiske pods tak traffic bhej rahi hai
+* Service IPs, ports
+
+---
+
+# ✅ **5. Deployment check karne ka command**
+
+```
+kubectl get deploy
+```
+
+### 👉 Ye kya batata hai?
+
+* Kitne replicas chahiye
+* Kitne actual me Running
+* Deployment stable hai ya nahi
+
+---
+
+# ✅ **6. Deployment status details**
+
+```
+kubectl describe deploy <deployment-name>
+```
+
+### 👉 Ye kya batata hai?
+
+* Koi rollout error?
+* Container image ka version
+* Pod creation events
+
+---
+
+# ✅ **7. Deployment rollout status**
+
+```
+kubectl rollout status deploy/<deployment-name>
+```
+
+### 👉 Ye kya batata hai?
+
+* Deployment successfully complete hua ya nahi
+* Rolling update stuck to nahi ho gaya
+
+---
+
+# ✅ **8. App ke container logs dekhne ka command**
+
+```
+kubectl logs <pod-name>
+```
+
+### 👉 Ye kya batata hai?
+
+* Application chal rahi hai ki error aa raha hai
+* Web server start hua ya nahi
+
+---
+
+# ✔️ **Ab tu Webapp Portal open kar sakta hai**
+
+Jab tak:
+
+* `kubectl get pods` → **Running** na dikhaye
+* `kubectl get svc` → Service IP/Port na dikhaye
+
+tab tak portal nahi chalega.
+
+---
+
+# 🔥 BONUS: Quick All-in-One Check
+
+```
+kubectl get pods -o wide
+kubectl get svc -o wide
+kubectl get deploy -o wide
+```
+
+Ye sab kuch ek line me detail me bata dega.
