@@ -1,0 +1,142 @@
+Main **ek-ek word tod ke**, **simple language** me samjhata hoon.
+Tu tension mat le — ye **real DevOps commands** hain, normal hai confuse hona.
+
+---
+
+## 🔹 LINE 1
+
+### `bash /root/curl-test.sh`
+
+### 🔍 Matlab kya hai?
+
+* `bash` → bol raha hai **Bash shell se script chalao**
+* `/root/curl-test.sh` → ye **script ka full path** hai
+
+### 🧠 Ye script karta kya hai?
+
+Ye script:
+
+* baar-baar web application ko request bhejta hai
+* jaise browser refresh karna repeatedly
+
+Example:
+
+```bash
+curl http://webapp-service
+```
+
+ye kaam loop me karta hai.
+
+### ❓ Kyun chalate hain?
+
+👉 **Check karne ke liye**:
+
+* app chal rahi hai ya nahi
+* update ke time down ho rahi hai ya nahi
+
+---
+
+## 🔹 LINE 2 (Actual magic yahin hota hai)
+
+```bash
+kubectl set image deployment/webapp webapp=kodekloud/webapp-color:v2
+```
+
+### 🔍 Word by word samjho:
+
+| Part                        | Matlab                             |
+| --------------------------- | ---------------------------------- |
+| `kubectl`                   | Kubernetes ko command dene ka tool |
+| `set image`                 | container ka image change karo     |
+| `deployment/webapp`         | deployment ka naam = **webapp**    |
+| `webapp=`                   | container ka naam                  |
+| `kodekloud/webapp-color:v2` | **new version image**              |
+
+### 🧠 Simple language:
+
+> “O Kubernetes, webapp deployment ke container ka image **version v2** kar de”
+
+---
+
+### ❓ Isse kya hota hai?
+
+* Kubernetes **naye pods banata hai**
+* purane pods **ek-ek karke** band karta hai
+* users ko **koi downtime nahi milta**
+
+Isko hi bolte hain 👉 **Rolling Update**
+
+---
+
+## 🔹 LINE 3
+
+```bash
+kubectl rollout status deployment/webapp
+```
+
+### 🔍 Matlab?
+
+* `rollout` → deployment update process
+* `status` → abhi kya chal raha hai check karo
+* `deployment/webapp` → webapp deployment ka status
+
+### 🧠 Output kya aata hai?
+
+```text
+deployment "webapp" successfully rolled out
+```
+
+### ❓ Kyun use karte hain?
+
+👉 Confirm karne ke liye:
+
+* update complete hua ya nahi
+* koi error to nahi aaya
+
+---
+
+## 🔹 FULL COMMAND WITH `&&` (IMPORTANT)
+
+```bash
+bash /root/curl-test.sh \
+&& kubectl set image deployment/webapp webapp=kodekloud/webapp-color:v2 \
+&& kubectl rollout status deployment/webapp
+```
+
+### 🧠 `&&` ka simple rule:
+
+> **Agar pehla command successful → tabhi next chalega**
+
+### Flow:
+
+1️⃣ curl script start
+2️⃣ image update hota hai
+3️⃣ rollout status check hota hai
+
+---
+
+## 🔥 REAL LIFE EXAMPLE (100% CLEAR)
+
+Soch:
+
+* `curl-test.sh` = customer website refresh kar raha
+* `set image` = backend update chal raha
+* `rollout status` = manager check kar raha “deploy hua ya nahi”
+
+Customers ko **website band nahi dikhti**
+➡️ ye hi DevOps ka kaam hai
+
+---
+
+## 🧠 ONE-LINE CDAC ANSWER
+
+> curl-test.sh application availability test karta hai, kubectl set image rolling update perform karta hai aur rollout status update completion verify karta hai.
+
+---
+
+## 🎯 INTERVIEW SHORT ANSWER
+
+**Q:** Why do we run curl-test.sh during rollout?
+**A:** To verify that application remains accessible during rolling updates.
+
+---
